@@ -5,7 +5,7 @@ export const config = (): EnvironmentVariables => ({
   DB_PASSWORD: process.env.DB_PASSWORD || '',
   DB_USERNAME: process.env.DB_USERNAME || 'root',
   SWAGGER_PASSWORD: process.env.SWAGGER_PASSWORD || 'test',
-  PORT: parseInt(process.env.SWAGGER_PASSWORD) || 3000,
+  PORT: parseInt(process.env.PORT) || 8000,
 });
 
 export interface EnvironmentVariables {
