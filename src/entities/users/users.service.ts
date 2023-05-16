@@ -39,20 +39,12 @@ export class UsersService {
       long: reqData.long,
     });
 
-    console.log('createdUser.id ', createdUser.id);
-
-    console.log(
-      '--------------------------------------------------------------------------------',
-    );
     await this.devicesRepository.create<Devices>({
       userId: createdUser.id,
       fcm: reqData.fcm,
       deviceId: reqData.deviceId,
       deviceType: reqData.deviceType,
     });
-    console.log(
-      '--------------------------------------------------------------------------------',
-    );
 
     const token = await this.jwtService.signAsync({
       id: createdUser.id,
@@ -94,9 +86,9 @@ export class UsersService {
    * @param reqData
    * @returns
    */
-  auth = async (reqData: any) => {
+  auth = async (id: number) => {
     return await this.usersRepository.findOne<Users>({
-      where: { id: reqData.id },
+      where: { id: id },
       include: [
         {
           model: Devices,
