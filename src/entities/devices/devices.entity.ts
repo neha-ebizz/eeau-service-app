@@ -39,7 +39,7 @@ export class Devices extends Model<Devices> {
     type: DataType.ENUM('I', 'A'),
     allowNull: false,
   })
-  deviceType: number;
+  deviceType: string;
 
   @Column({
     type: DataType.DATE,
