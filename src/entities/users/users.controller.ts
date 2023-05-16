@@ -18,6 +18,8 @@ import { UsersService } from './users.service';
 import { Users } from './users.entity';
 
 import { RegisterUserRequest } from './dto/register-user/request.dto';
+import { RegisterUserResponse } from './dto/register-user/response.dto';
+import { LoginUserRequest } from './dto/login-user/request.dto';
 
 @Controller('users')
 export class UsersController {
@@ -26,8 +28,19 @@ export class UsersController {
   @Post()
   @UseFilters(AllExceptionsFilter)
   @HttpCode(200)
-  public async registerUser(@Body() reqData: RegisterUserRequest) {
+  public async registerUser(
+    @Body() reqData: RegisterUserRequest,
+  ): Promise<RegisterUserResponse> {
     return this.usersService.registerUser(reqData);
+  }
+
+  @Post('login')
+  @UseFilters(AllExceptionsFilter)
+  @HttpCode(200)
+  public async loginUser(
+    @Body() reqData: LoginUserRequest,
+  ): Promise<RegisterUserResponse> {
+    return this.usersService.loginUser(reqData);
   }
 
   @UseGuards(AuthGuard)

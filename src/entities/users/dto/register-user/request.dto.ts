@@ -32,7 +32,7 @@ export class RegisterUserRequest {
   @Matches(passwordRegex, errorMessageInvalidPassword)
   readonly password: string;
 
-  @IsNumber()
+  @IsString()
   @IsNotEmpty()
   readonly countryCode: string;
 
