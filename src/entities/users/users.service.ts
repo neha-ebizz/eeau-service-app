@@ -30,7 +30,7 @@ export class UsersService {
     const payload = {
       id: createdRecord.id,
     };
-    var access_token = await this.jwtService.signAsync(payload);
+    const access_token = await this.jwtService.signAsync(payload);
 
     return access_token;
   };
@@ -51,7 +51,7 @@ export class UsersService {
     const payload = {
       id: createdRecord.id,
     };
-    var access_token = await this.jwtService.signAsync(payload);
+    const access_token = await this.jwtService.signAsync(payload);
 
     return access_token;
   };
