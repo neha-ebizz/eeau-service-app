@@ -1,3 +1,4 @@
+import 'dotenv/config';
 export const config = (): EnvironmentVariables => ({
   DB_PORT: parseInt(process.env.DB_PORT) || 3306,
   DB_HOST: process.env.DB_HOST || 'localhost',

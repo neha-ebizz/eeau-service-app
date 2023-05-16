@@ -1,6 +1,15 @@
-import { Controller, Post, HttpCode, Body, UseFilters } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  HttpCode,
+  Body,
+  UseFilters,
+  Get,
+  UseGuards,
+} from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Express } from 'express';
+import { AuthGuard } from '../auth/auth.guard';
 
 import { AllExceptionsFilter } from 'src/shared/exception/httpException';
 
@@ -19,5 +28,13 @@ export class UsersController {
   @HttpCode(200)
   public async registerUser(@Body() reqData: RegisterUserRequest) {
     return this.usersService.registerUser(reqData);
+  }
+
+  @UseGuards(AuthGuard)
+  @Get()
+  @UseFilters(AllExceptionsFilter)
+  @HttpCode(200)
+  public async GetById(@Body() reqData: any) {
+    return this.usersService.findOne(reqData);
   }
 }
