@@ -1,4 +1,4 @@
-import { Inject } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 
@@ -8,7 +8,9 @@ import { Devices } from '../devices/devices.entity';
 import { RegisterUserRequest } from './dto/register-user/request.dto';
 import { RegisterUserResponse } from './dto/register-user/response.dto';
 import { LoginUserRequest } from './dto/login-user/request.dto';
+import { GetUserByIdResponse } from './dto/get-by-id/response.dto';
 
+@Injectable()
 export class UsersService {
   constructor(
     private jwtService: JwtService,
@@ -100,8 +102,16 @@ export class UsersService {
   };
 
   getById = async (id: string) => {
-    return await this.usersRepository.findOne<Users>({
+    const userData = await this.usersRepository.findOne<Users>({
       where: { id: id },
     });
+    return userData ? new GetUserByIdResponse(userData) : false;
+  };
+
+  userExist = async (id: string) => {
+    const userData = await this.usersRepository.findOne<Users>({
+      where: { id: id },
+    });
+    return userData ? true : false;
   };
 }

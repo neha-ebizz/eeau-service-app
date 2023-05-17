@@ -1,5 +1,5 @@
 import { Devices } from './devices.entity';
 
-export const devicesRepository = [
+export const devicesProviders = [
   { provide: 'DevicesRepository', useValue: Devices },
 ];
