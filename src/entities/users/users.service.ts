@@ -114,4 +114,11 @@ export class UsersService {
     });
     return userData ? true : false;
   };
+
+  emailExist = async (email: string) => {
+    const emailExist = await this.usersRepository.findOne<Users>({
+      where: { email: email },
+    });
+    return emailExist ? false : true;
+  };
 }

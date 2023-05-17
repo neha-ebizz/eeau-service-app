@@ -1,6 +1,7 @@
 import { ValidationOptions, registerDecorator } from 'class-validator';
 import { Type } from '@nestjs/common';
 import { IsUserExistByUserId } from './user-exist-validation';
+import { isEmailExist } from './email-exist-validation';
 
 export function customValidator(
   property?: string,
@@ -11,6 +12,9 @@ export function customValidator(
 
     if (propertyName == 'userId') {
       validateClass = IsUserExistByUserId;
+    }
+    if (propertyName == 'email') {
+      validateClass = isEmailExist;
     }
 
     registerDecorator({

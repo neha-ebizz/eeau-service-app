@@ -6,3 +6,7 @@ export const errorMessageInvalidPassword = {
 export const invalidDeviceTypeError = {
   message: 'Invalid deviceType (A : android, I : IOS)',
 };
+
+export const emailExistError = {
+  message: 'email/phone is already in use',
+};

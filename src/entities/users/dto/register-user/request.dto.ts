@@ -11,6 +11,7 @@ import {
   invalidDeviceTypeError,
 } from 'src/shared/Services/errorService';
 import { deviceTypeEnum } from 'src/shared/enum/enum';
+import { customValidator } from 'src/shared/validate/validator';
 
 export class RegisterUserRequest {
   @IsString()
@@ -24,6 +25,9 @@ export class RegisterUserRequest {
   @IsString()
   @IsNotEmpty()
   @IsEmail()
+  @customValidator('', {
+    message: 'email exist',
+  })
   readonly email: string;
 
   @IsString()
