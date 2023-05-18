@@ -5,6 +5,8 @@ import { JwtService } from '@nestjs/jwt';
 import { Users } from './users.entity';
 import { Devices } from '../devices/devices.entity';
 
+import { DevicesService } from '../devices/devices.service';
+
 import { RegisterUserRequest } from './dto/register-user/request.dto';
 import { RegisterUserResponse } from './dto/register-user/response.dto';
 import { LoginUserRequest } from './dto/login-user/request.dto';
@@ -14,6 +16,7 @@ import { GetUserByIdResponse } from './dto/get-by-id/response.dto';
 export class UsersService {
   constructor(
     private jwtService: JwtService,
+    private readonly devicesService: DevicesService,
 
     @Inject('UsersRepository')
     private readonly usersRepository: typeof Users,
@@ -41,7 +44,7 @@ export class UsersService {
       long: reqData.long,
     });
 
-    await this.devicesRepository.create<Devices>({
+    await this.devicesService.addDevice({
       userId: createdUser.id,
       fcm: reqData.fcm,
       deviceId: reqData.deviceId,
@@ -69,7 +72,7 @@ export class UsersService {
       where: { email: reqData.email },
     });
 
-    await this.devicesRepository.create<Devices>({
+    await this.devicesService.addDevice({
       userId: userData.id,
       fcm: reqData.fcm,
       deviceId: reqData.deviceId,
