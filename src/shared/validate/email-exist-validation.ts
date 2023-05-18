@@ -22,8 +22,6 @@ export class IsEmailExist implements ValidatorConstraintInterface {
       return userData ? false : true;
     } else {
       if (userData) {
-        console.log(userData.password);
-
         const passwordMatch = await bcrypt.compare(password, userData.password);
         if (passwordMatch == false) {
           return false;
