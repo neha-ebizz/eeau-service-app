@@ -101,6 +101,11 @@ export class UsersService {
     });
   };
 
+  /**
+   * get user by id
+   * @param id
+   * @returns
+   */
   getById = async (id: string) => {
     const userData = await this.usersRepository.findOne<Users>({
       where: { id: id },
@@ -108,6 +113,11 @@ export class UsersService {
     return userData ? new GetUserByIdResponse(userData) : false;
   };
 
+  /**
+   * validator : user exist by id
+   * @param id
+   * @returns
+   */
   userExist = async (id: string) => {
     const userData = await this.usersRepository.findOne<Users>({
       where: { id: id },
@@ -115,6 +125,11 @@ export class UsersService {
     return userData ? true : false;
   };
 
+  /**
+   * validator : email exist and login check
+   * @param email
+   * @returns
+   */
   emailExist = async (email: string) => {
     const emailExist = await this.usersRepository.findOne<Users>({
       where: { email: email },
@@ -122,6 +137,12 @@ export class UsersService {
     return emailExist;
   };
 
+  /**
+   * validator : country code + phone exist
+   * @param countryCode
+   * @param phone
+   * @returns
+   */
   phoneExist = async (countryCode: number, phone: bigint) => {
     const phoneExist = await this.usersRepository.findOne<Users>({
       where: {
