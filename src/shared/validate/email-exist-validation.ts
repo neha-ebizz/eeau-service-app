@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import * as bcrypt from 'bcrypt';
 import {
   ValidationArguments,
   ValidatorConstraint,
@@ -12,14 +13,26 @@ export class IsEmailExist implements ValidatorConstraintInterface {
   constructor(protected readonly usersService: UsersService) {}
 
   async validate(email: string, args: ValidationArguments) {
-    let requestType: number;
+    const [relatedPropertyName] = args.constraints;
+    const password = (args.object as object)[relatedPropertyName];
+
+    const userData = await this.usersService.emailExist(email);
 
     if (args.targetName == 'RegisterUserRequest') {
-      requestType = 0;
+      return userData ? false : true;
     } else {
-      requestType = 1;
-    }
+      if (userData) {
+        console.log(userData.password);
 
-    return await this.usersService.emailExist(email, requestType);
+        const passwordMatch = await bcrypt.compare(password, userData.password);
+        if (passwordMatch == false) {
+          return false;
+        } else {
+          return true;
+        }
+      } else {
+        return false;
+      }
+    }
   }
 }

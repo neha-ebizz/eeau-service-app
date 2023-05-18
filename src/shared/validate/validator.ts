@@ -20,6 +20,9 @@ export function customValidator(
     if (propertyName == 'phone') {
       validateClass = IsPhoneExist;
     }
+    if (propertyName == 'password') {
+      validateClass = IsPhoneExist;
+    }
 
     registerDecorator({
       target: object.constructor,

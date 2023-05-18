@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsString, IsEnum, IsEmail } from 'class-validator';
 import {
-  emailDoesntExistError,
+  invalidLoginError,
   invalidDeviceTypeError,
 } from 'src/shared/Services/errorService';
 import { deviceTypeEnum } from 'src/shared/enum/enum';
@@ -10,8 +10,8 @@ export class LoginUserRequest {
   @IsString()
   @IsNotEmpty()
   @IsEmail()
-  @customValidator('', {
-    message: emailDoesntExistError.message,
+  @customValidator('password', {
+    message: invalidLoginError.message,
   })
   readonly email: string;
 

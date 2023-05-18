@@ -37,8 +37,8 @@ export class UserDTO {
     this.address = users.address;
     this.lat = users.lat;
     this.long = users.long;
-    this.isEmailVerified = users.isEmailVerified;
-    this.isBlockedByAdmin = users.isBlockedByAdmin;
+    this.isEmailVerified = +users.isEmailVerified;
+    this.isBlockedByAdmin = +users.isBlockedByAdmin;
     this.firstCreated = users.firstCreated;
     this.lastModified = users.lastModified;
   }

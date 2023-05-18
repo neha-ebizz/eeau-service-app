@@ -115,15 +115,11 @@ export class UsersService {
     return userData ? true : false;
   };
 
-  emailExist = async (email: string, requestType: number) => {
+  emailExist = async (email: string) => {
     const emailExist = await this.usersRepository.findOne<Users>({
       where: { email: email },
     });
-    if (requestType == 0) {
-      return emailExist ? false : true;
-    } else {
-      return emailExist ? true : false;
-    }
+    return emailExist;
   };
 
   phoneExist = async (countryCode: number, phone: bigint) => {
