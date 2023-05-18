@@ -18,3 +18,7 @@ export const phoneInUseError = {
 export const userNotExistError = {
   message: 'User not found.',
 };
+
+export const emailDoesntExistError = {
+  message: `Email doesn't exist.`,
+};
