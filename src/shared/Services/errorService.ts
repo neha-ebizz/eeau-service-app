@@ -14,3 +14,7 @@ export const emailInUseError = {
 export const phoneInUseError = {
   message: 'Phone is already in use, please try another phone number.',
 };
+
+export const userNotExistError = {
+  message: 'User not found.',
+};

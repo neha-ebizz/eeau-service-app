@@ -11,7 +11,7 @@ import { UsersService } from 'src/entities/users/users.service';
 export class IsPhoneExist implements ValidatorConstraintInterface {
   constructor(protected readonly usersService: UsersService) {}
 
-  async validate(phone: string, args: ValidationArguments) {
+  async validate(phone: bigint, args: ValidationArguments) {
     const [relatedPropertyName] = args.constraints;
     const countryCode = (args.object as object)[relatedPropertyName];
 

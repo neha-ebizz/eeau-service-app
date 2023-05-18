@@ -37,10 +37,10 @@ export class Users extends Model<Users> {
   password: string;
 
   @Column
-  countryCode: string;
+  countryCode: number;
 
   @Column
-  phone: string;
+  phone: bigint;
 
   @Column
   address: string;

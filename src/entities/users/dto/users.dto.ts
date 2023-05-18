@@ -9,9 +9,9 @@ export class UserDTO {
 
   readonly email: string;
 
-  readonly countryCode: string;
+  readonly countryCode: number;
 
-  readonly phone: string;
+  readonly phone: bigint;
 
   readonly address: string;
 

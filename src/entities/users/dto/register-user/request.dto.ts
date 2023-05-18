@@ -4,6 +4,7 @@ import {
   Matches,
   IsEnum,
   IsEmail,
+  IsNumber,
 } from 'class-validator';
 import { passwordRegex } from 'src/shared/constants/regex';
 import {
@@ -37,16 +38,16 @@ export class RegisterUserRequest {
   @Matches(passwordRegex, invalidPasswordError)
   readonly password: string;
 
-  @IsString()
+  @IsNumber()
   @IsNotEmpty()
-  readonly countryCode: string;
+  readonly countryCode: number;
 
-  @IsString()
+  @IsNumber()
   @IsNotEmpty()
   @customValidator('countryCode', {
     message: phoneInUseError.message,
   })
-  readonly phone: string;
+  readonly phone: bigint;
 
   @IsString()
   @IsNotEmpty()

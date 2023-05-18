@@ -34,7 +34,7 @@ export class UsersService {
       lastName: reqData.lastName,
       email: reqData.email,
       password: bcrypt.hashSync(reqData.password, await bcrypt.genSalt()),
-      countryCode: reqData.countryCode.toString(),
+      countryCode: reqData.countryCode,
       phone: reqData.phone,
       address: reqData.address,
       lat: reqData.lat,
@@ -122,7 +122,7 @@ export class UsersService {
     return emailExist ? false : true;
   };
 
-  phoneExist = async (countryCode: string, phone: string) => {
+  phoneExist = async (countryCode: number, phone: bigint) => {
     const phoneExist = await this.usersRepository.findOne<Users>({
       where: {
         countryCode: countryCode,

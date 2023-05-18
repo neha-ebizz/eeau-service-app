@@ -49,6 +49,6 @@ export class AllExceptionsFilter implements ExceptionFilter {
       `request method: ${request.method} request url${request.url}`,
       JSON.stringify(errorResponse),
     );
-    response.status(statusCode).json(errorResponse);
+    response.status(200).json(errorResponse);
   }
 }
