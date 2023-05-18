@@ -7,8 +7,10 @@ import {
 } from 'class-validator';
 import { passwordRegex } from 'src/shared/constants/regex';
 import {
-  errorMessageInvalidPassword,
+  invalidPasswordError,
   invalidDeviceTypeError,
+  emailInUseError,
+  phoneInUseError,
 } from 'src/shared/Services/errorService';
 import { deviceTypeEnum } from 'src/shared/enum/enum';
 import { customValidator } from 'src/shared/validate/validator';
@@ -26,13 +28,13 @@ export class RegisterUserRequest {
   @IsNotEmpty()
   @IsEmail()
   @customValidator('', {
-    message: 'email exist',
+    message: emailInUseError.message,
   })
   readonly email: string;
 
   @IsString()
   @IsNotEmpty()
-  @Matches(passwordRegex, errorMessageInvalidPassword)
+  @Matches(passwordRegex, invalidPasswordError)
   readonly password: string;
 
   @IsString()
@@ -41,6 +43,9 @@ export class RegisterUserRequest {
 
   @IsString()
   @IsNotEmpty()
+  @customValidator('countryCode', {
+    message: phoneInUseError.message,
+  })
   readonly phone: string;
 
   @IsString()

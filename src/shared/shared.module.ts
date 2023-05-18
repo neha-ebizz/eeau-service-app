@@ -5,7 +5,8 @@ import { devicesProviders } from 'src/entities/devices/devices.provider';
 import { UsersService } from 'src/entities/users/users.service';
 
 import { IsUserExistByUserId } from './validate/user-exist-validation';
-import { isEmailExist } from './validate/email-exist-validation';
+import { IsEmailExist } from './validate/email-exist-validation';
+import { IsPhoneExist } from './validate/phone-exist-validation';
 
 @Global()
 @Module({
@@ -13,14 +14,16 @@ import { isEmailExist } from './validate/email-exist-validation';
   providers: [
     UsersService,
     IsUserExistByUserId,
-    isEmailExist,
+    IsEmailExist,
+    IsPhoneExist,
     ...usersProviders,
     ...devicesProviders,
     ConfigService,
   ],
   exports: [
     IsUserExistByUserId,
-    isEmailExist,
+    IsEmailExist,
+    IsPhoneExist,
     ConfigService,
     ...usersProviders,
     ...devicesProviders,

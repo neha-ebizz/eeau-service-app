@@ -121,4 +121,14 @@ export class UsersService {
     });
     return emailExist ? false : true;
   };
+
+  phoneExist = async (countryCode: string, phone: string) => {
+    const phoneExist = await this.usersRepository.findOne<Users>({
+      where: {
+        countryCode: countryCode,
+        phone: phone,
+      },
+    });
+    return phoneExist ? false : true;
+  };
 }
